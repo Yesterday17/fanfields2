@@ -603,7 +603,7 @@ function wrapper(plugin_info) {
                 const index = thisplugin.sortedFanpoints.findIndex(p => p.guid === o.guid);
                 return { title, index };
             });
-            const outgoingHtml = outgoings.map(o => `->${o.index}:&nbsp;${o.title}`).join('<br>')
+            const outgoingHtml = outgoings.map(o => `(${o.index})&nbsp;${o.title}`).join('<br>')
 
             text+='<tr><td>' + (index) + '</td><td>'+ title + '</td><td ' + availableKeysText + portal.incoming.length+ '</td><td>' + portal.outgoing.length + '</td><td>' + outgoingHtml + '</td></tr>';
         });
