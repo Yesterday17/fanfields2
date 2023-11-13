@@ -563,7 +563,7 @@ function wrapper(plugin_info) {
 
     // Show as list
     thisplugin.exportText = function() {
-        var text = "<table><thead><tr><th style='text-align:right'>Pos.</th><th style='text-align:left'>Portal Name</th><th>Keys</th><th>Links</th></tr></thead><tbody>";
+        var text = "<table><thead><tr><th style='text-align:right'>Pos.</th><th style='text-align:left'>Portal Name</th><th>Keys</th><th>Links</th><th>Outgoings</th></tr></thead><tbody>";
         var gmnav='http://maps.google.com/maps/dir/'
         thisplugin.sortedFanpoints.forEach(function(portal, index) {
             //debugger;
@@ -597,7 +597,15 @@ function wrapper(plugin_info) {
             } else {
                 availableKeysText = '>';
             };
-            text+='<tr><td>' + (index) + '</td><td>'+ title + '</td><td ' + availableKeysText + portal.incoming.length+ '</td><td>' + portal.outgoing.length + '</td></tr>';
+
+            const outgoings = portal.outgoing.map(o => {
+                const title = window.portals[o.guid]?.options.data.title ?? "Unknown title";
+                const index = thisplugin.sortedFanpoints.findIndex(p => p.guid === o.guid);
+                return { title, index };
+            });
+            const outgoingHtml = outgoings.map(o => `->${o.index}:&nbsp;${o.title}`).join('<br>')
+
+            text+='<tr><td>' + (index) + '</td><td>'+ title + '</td><td ' + availableKeysText + portal.incoming.length+ '</td><td>' + portal.outgoing.length + '</td><td>' + outgoingHtml + '</td></tr>';
         });
         text+='</tbody></table>';
         if (window.plugin.keys || window.plugin.LiveInventory) {
