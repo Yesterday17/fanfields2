@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name            IITC plugin: Fan Fields 2 
-// @id              fanfields@heistergand
+// @name            IITC plugin: Fan Fields 2 [Yesterday17] 
+// @id              fanfields@Yesterday17
 // @author          Heistergand, Yesterday17
 // @category        Layer
 // @version         2.5.3.20230919
